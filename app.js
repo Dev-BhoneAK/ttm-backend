@@ -1,27 +1,17 @@
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
-var { graphqlHTTP } = require("express-graphql");
-var { buildSchema } = require("graphql");
-var schema = require("./graphql/schema");
+import "dotenv/config";
+import express from "express";
+import path from "path";
+import cookieParser from "cookie-parser";
+import logger from "morgan";
+import { graphqlHTTP } from "express-graphql";
+import { buildSchema } from "graphql";
 
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
+import schema from "./graphql/schema.js";
+import connectDB from "./config/database.js";
+import indexRouter from "./routes/index.js";
+import usersRouter from "./routes/users.js";
 
 var app = express();
-
-// Construct a schema, using GraphQL schema language
-// var schema = buildSchema(`
-//     type Query {
-//         hello: String
-//     }`);
-
-var root = {
-  hello: () => {
-    return "Hello world!";
-  },
-};
 
 app.use(
   "/graphql",
@@ -34,9 +24,16 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
+// app.use(express.static(path.join(__dirname, "public")));
+const port = process.env.PORT || 5000;
+
+connectDB();
 
 app.use("/", indexRouter);
 // app.use('/users', usersRouter);
 
-module.exports = app;
+app.listen(port, () =>
+  console.log(`Server running in ${process.env.NODE_ENV} mode on port ${port}`)
+);
+
+// module.exports = app;
