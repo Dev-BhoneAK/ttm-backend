@@ -1,11 +1,11 @@
-const { categories } = require("../data/db");
-const {
+import { categories } from "../data/db.js";
+import {
   GraphQLObjectType,
   GraphQLString,
   GraphQLSchema,
   GraphQLList,
   GraphQLInt,
-} = require("graphql");
+} from "graphql";
 
 const CategoryType = new GraphQLObjectType({
   name: "Category",
@@ -30,6 +30,10 @@ const RootQuery = new GraphQLObjectType({
   },
 });
 
-module.exports = new GraphQLSchema({
+export default new GraphQLSchema({
   query: RootQuery,
 });
+
+// module.exports = new GraphQLSchema({
+//   query: RootQuery,
+// });
