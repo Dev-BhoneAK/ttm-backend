@@ -2,9 +2,10 @@
   "name": "ttm-backend",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www"
+    "start": "node app.js",
+    "dev": "node app.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
