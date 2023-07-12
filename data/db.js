@@ -1,4 +1,4 @@
-const categories = [
+export const categories = [
   {
     id: 1,
     name: "Local",
@@ -389,4 +389,4 @@ const videos = [
   },
 ];
 
-module.exports = { categories, news, articles, novels, videos };
+// module.exports = { categories, news, articles, novels, videos };
